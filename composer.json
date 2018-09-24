@@ -1,0 +1,23 @@
+{
+    "name": "casaecafe/mapper-library",
+    "description": "Array template mapper from CasaeCafe.com",
+    "type": "library",
+    "minimum-stability": "stable",
+    "require": {
+        "twig/twig": "^2.0",
+        "adbario/php-dot-notation": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "CasaCafe\\Library\\Mapper\\": "src/Mapper"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CasaCafe\\Unit\\Library\\": "test/Unit"
+        }
+    }
+}
