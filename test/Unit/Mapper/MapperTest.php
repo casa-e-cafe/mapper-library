@@ -77,7 +77,7 @@ class MapperTest extends TestCase
             'int_type(int)' => '1',
             'float_type(float)' => '2.25',
             'bool_type(bool)' => 'false',
-            'boolean_type(boolean)' => 'true'
+            'boolean_type(boolean)' => '  true '
         ];
 
         $mapper = new Mapper([], []);
