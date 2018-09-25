@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CasaCafe\Unit\Library\Mapper\Types;
+namespace CasaCafe\Library\Mapper\Types;
 
 class StringTypeConverter implements TypeConverterInterface
 {

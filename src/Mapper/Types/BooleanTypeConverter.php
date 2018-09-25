@@ -1,15 +1,15 @@
 <?php
 
-namespace CasaCafe\Unit\Library\Mapper\Types;
+namespace CasaCafe\Library\Mapper\Types;
 
-class IntegerTypeConverter implements TypeConverterInterface
+class BooleanTypeConverter implements TypeConverterInterface
 {
     public function convert(string $stringValue = null)
     {
         $convertedValue = null;
 
         if (!is_null($stringValue)) {
-            $convertedValue = (int) $stringValue;
+            $convertedValue = (trim($stringValue) === 'true');
         }
         return $convertedValue;
     }
