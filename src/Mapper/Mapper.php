@@ -3,16 +3,19 @@
 namespace  CasaCafe\Library\Mapper;
 
 use Adbar\Dot;
+use CasaCafe\Unit\Library\Mapper\Types\TypeConverterManager;
 
 class Mapper
 {
     private $configResolver;
     private $entity;
+    private $typeConverterManager;
 
     public function __construct(array $context, array $entity = [])
     {
         $this->entity = new Dot($entity);
         $this->configResolver = new ConfigResolver($context);
+        $this->typeConverterManager = new TypeConverterManager();
     }
 
     public function processConfigArray(array $configArray, $currentPath = '')
@@ -51,22 +54,9 @@ class Mapper
 
     private function convertValueToType(string $configValue, string $type)
     {
-        $convertedValue = null;
-        switch ($type) {
-            case 'int':
-                $convertedValue = (int) $configValue;
-                break;
-            case 'float':
-                $convertedValue = (float) $configValue;
-                break;
-            case 'boolean':
-            case 'bool':
-                $convertedValue = (trim($configValue) === 'true');
-                break;
-            default:
-                $convertedValue = (string) $configValue;
-                break;
-        }
+        $converter = $this->typeConverterManager->getConverterFromType($type);
+        $configValue = $configValue !== '' ? $configValue : null;
+        $convertedValue = $converter->convert($configValue);
         return $convertedValue;
     }
 
