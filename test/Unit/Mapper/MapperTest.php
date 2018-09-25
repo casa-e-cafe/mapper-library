@@ -118,4 +118,43 @@ class MapperTest extends TestCase
         $this->assertInternalType('int', $entity['int_type']);
         $this->assertInternalType('boolean', $entity['boolean_type']);
     }
+
+    public function testTypeMappingNullWithTypes()
+    {
+        $configArray =[
+            'int_type1 (int)' => '',
+            'int_type2 (int)' => '0',
+            'boolean_type1 (boolean)' => '',
+            'boolean_type2 (boolean)' => 'false',
+            'float_type1 (float)' => '',
+            'float_type2 (float)' => '0.0',
+            'string_type1 (string)' => '',
+            'string_type2 (string)' => ' ',
+        ];
+
+        $mapper = new Mapper([], []);
+
+        $mapper->processConfigArray($configArray);
+
+        $expectedEntity = [
+            'int_type1' => null,
+            'int_type2' => 0,
+            'boolean_type1' => null,
+            'boolean_type2' => false,
+            'float_type1' => null,
+            'float_type2' => 0.0,
+            'string_type1' => null,
+            'string_type2' => ' ',
+        ];
+        $entity = $mapper->getEntity();
+        $this->assertEquals($expectedEntity, $entity);
+        $this->assertInternalType('int', $entity['int_type2']);
+        $this->assertInternalType('boolean', $entity['boolean_type2']);
+        $this->assertInternalType('float', $entity['float_type2']);
+        $this->assertInternalType('string', $entity['string_type2']);
+        $this->assertNull($entity['int_type1']);
+        $this->assertNull($entity['boolean_type1']);
+        $this->assertNull($entity['float_type1']);
+        $this->assertNull($entity['string_type1']);
+    }
 }
