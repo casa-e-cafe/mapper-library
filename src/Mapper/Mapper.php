@@ -61,7 +61,7 @@ class Mapper
                 break;
             case 'boolean':
             case 'bool':
-                $convertedValue = ($configValue === 'true');
+                $convertedValue = (trim($configValue) === 'true');
                 break;
             default:
                 $convertedValue = (string) $configValue;
