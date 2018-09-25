@@ -93,5 +93,29 @@ class MapperTest extends TestCase
         $entity = $mapper->getEntity();
         $this->assertEquals($expectedEntity, $entity);
         $this->assertInternalType('int', $entity['int_type']);
+        $this->assertInternalType('float', $entity['float_type']);
+        $this->assertInternalType('boolean', $entity['bool_type']);
+        $this->assertInternalType('boolean', $entity['boolean_type']);
+    }
+
+    public function testTypeMappingWithSpace()
+    {
+        $configArray =[
+            'int_type (int)' => '1',
+            'boolean_type     (boolean)' => 'true'
+        ];
+
+        $mapper = new Mapper([], []);
+
+        $mapper->processConfigArray($configArray);
+
+        $expectedEntity = [
+            'int_type' => 1,
+            'boolean_type' => true
+        ];
+        $entity = $mapper->getEntity();
+        $this->assertEquals($expectedEntity, $entity);
+        $this->assertInternalType('int', $entity['int_type']);
+        $this->assertInternalType('boolean', $entity['boolean_type']);
     }
 }

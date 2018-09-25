@@ -38,18 +38,13 @@ class Mapper
 
     private function getTarget(string $targetPath) : \stdClass
     {
-        $type = 'string';
-        $path = $targetPath;
-        if (preg_match('/(.*)\((.*)\)/', $targetPath)) {
-            $matches = [];
-            preg_match('/(.*)\((.*)\)/', $targetPath, $matches);
-            $path = $matches[1];
-            $type =  $matches[2];
-        }
+        $matches = [];
+        $typeRegex = '/(\S+)\s*\((int|float|bool|boolean|string)\)/';
+        preg_match($typeRegex, $targetPath, $matches);
 
         $target = new \stdClass();
-        $target->path = $path;
-        $target->type = $type;
+        $target->path = $matches[1] ?? $targetPath;
+        $target->type = $matches[2] ?? 'string';
 
         return $target;
     }
