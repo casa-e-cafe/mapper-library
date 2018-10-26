@@ -157,4 +157,20 @@ class MapperTest extends TestCase
         $this->assertNull($entity['float_type1']);
         $this->assertNull($entity['string_type1']);
     }
+
+    public function testResolveBoolExpressionShouldReturTrue()
+    {
+        $expression = 'var.value == 2';
+        $context = ['var' => ['value' => 2]];
+        $result = Mapper::evaluateBoolExpression($expression, $context);
+        $this->assertTrue($result);
+    }
+
+    public function testResolveBoolExpressionShouldReturnFalse()
+    {
+        $expression = 'var.value == 2';
+        $context = ['var' => ['value' => 1]];
+        $result = Mapper::evaluateBoolExpression($expression, $context);
+        $this->assertFalse($result);
+    }
 }
