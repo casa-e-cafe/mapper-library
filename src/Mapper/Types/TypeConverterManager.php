@@ -23,4 +23,12 @@ class TypeConverterManager
         $converter = $this->typeConverterMap[$type] ??  $this->typeConverterMap['string'];
         return $converter;
     }
+
+    public function convertValueToType(string $configValue, string $type)
+    {
+        $converter = $this->getConverterFromType($type);
+        $configValue = $configValue !== '' ? $configValue : null;
+        $convertedValue = $converter->convert($configValue);
+        return $convertedValue;
+    }
 }
