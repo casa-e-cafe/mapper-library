@@ -31,6 +31,6 @@ class Mapper extends SimpleMapper
 
     public function getEntity()
     {
-        $this->entity->all();
+        return $this->entity->all();
     }
 }

@@ -17,7 +17,7 @@ class MapperTest extends TestCase
 
         $mapper->processConfig($config, $entityPath);
         $entity = $mapper->getEntity();
-        $this->assertEquals($entity['name']['first'], 'Rafael');
+        $this->assertEquals('Rafael', $entity['name']['first']);
     }
 
     public function testConfigArrayShouldSetValueToTarget()
